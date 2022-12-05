@@ -101,7 +101,7 @@ $(awk -F "/" '{print "ifconfig eth0 inet6 add " $5 "/64"}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
-sudo apt-get install gcc net-tools libarchive-tools zip >/dev/null
+sudo apt-get install gcc net-tools libarchive-tools zip iptables >/dev/null
 
 install_3proxy
 
