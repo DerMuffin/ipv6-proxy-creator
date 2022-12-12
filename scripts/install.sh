@@ -13,15 +13,14 @@ gen64() {
 }
 install_3proxy() {
   echo "installing 3proxy"
-  sudo apt install unzip
-  wget "https://github.com/3proxy/3proxy/releases/download/0.9.4/3proxy-0.9.4.zip"
-  unzip 3proxy-0.9.4.zip
-  cd 3proxy-3proxy-0.9.4
+  URL="https://github.com/z3APA3A/3proxy/archive/3proxy-0.8.6.tar.gz"
+  wget -qO- $URL | bsdtar -xvf-
+  cd 3proxy-3proxy-0.8.6
   make -f Makefile.Linux
   mkdir -p /usr/local/etc/3proxy/{bin,logs,stat}
   cp src/3proxy /usr/local/etc/3proxy/bin/
   cp ./scripts/rc.d/proxy.sh /etc/init.d/3proxy
-  sudo chmod +x /etc/init.d/3proxy
+  chmod +x /etc/init.d/3proxy
   chkconfig 3proxy on
   cd $WORKDIR
 }
@@ -102,7 +101,7 @@ $(awk -F "/" '{print "ifconfig eth0 inet6 add " $5 "/64"}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
-sudo apt-get install gcc net-tools libarchive-tools zip iptables >/dev/null
+yum -y install gcc net-tools bsdtar zip >/dev/null
 
 install_3proxy
 
